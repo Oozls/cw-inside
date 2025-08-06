@@ -1,4 +1,4 @@
-main .container {
+#main_container {
     padding: 1em;
 
     display: grid;
@@ -6,6 +6,16 @@ main .container {
     grid-column-gap: 5px;
     grid-row-gap: 5px;
 }
+
+#patch_container {
+    margin-top: 2em;
+    padding: 2em;
+    font-family: 'Noto Sans K', 'Noto Sans';
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.5);
+}
+
+#patch_container p { margin: 0; }
 
 .title, .best, .test_time, .mogo_time, .final_test_time {
     border: solid 1px var(--static-color);
@@ -15,7 +25,7 @@ main .container {
 }
 
 .title {
-    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
     grid-area: 1 / 1 / 2 / 4 ;
     text-align: center;
     padding: 1em 0 1em 0;
@@ -38,7 +48,7 @@ main .container {
 }
 
 #test_timer, #mogo_timer, #final_test_timer {
-    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
     font-size: 1.5em;
     font-weight: 400;
     color: var(--text-color);

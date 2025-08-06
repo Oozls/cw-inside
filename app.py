@@ -106,7 +106,8 @@ def postAction():
             "content":content,
             "unix_time":unix_time,
             "gaechoo":0,
-            "user_id":session['_id']
+            "user_id":session['_id'],
+            "liked_user":[]
         })
     return redirect("/list")
 
@@ -159,28 +160,30 @@ def like(id):
     if not isLogin():
         return '로그인이 필요합니다.', 401
 
-    liked_posts = request.cookies.get('liked_posts')
-    if liked_posts:
-        liked_posts = json.loads(liked_posts)
-    else:
-        liked_posts = []
+    user_id = session['_id']
 
-    if id in liked_posts:
+    if not post['liked_user']:
+        post_collection.update_one({"_id":ObjectId(id)},{'$set': {'liked_user':[]}})
+    
+    post = post_collection.find_one({"_id":ObjectId(id)})
+    liked_user = post['liked_user']
+
+    if user_id in liked_user:
         post_collection.update_one(
             {'_id': ObjectId(id)},
             {'$inc': {'gaechoo': -1}}
         )
-        liked_posts.remove(id)
+        liked_user.remove(user_id)
+        post_collection.update_one({"_id":ObjectId(id)},{'$set': {'liked_user': liked_user}})
     else:
         post_collection.update_one(
             {'_id': ObjectId(id)},
-            {'$inc': {'gaechoo': 1}}
+            {'$inc': {'gaechoo': +1}}
         )
-        liked_posts.append(id)
-    resp = make_response(redirect('/post/'+id))
-    resp.set_cookie('liked_posts', json.dumps(liked_posts), max_age=60*60*24*30)  # 30일 유지
+        liked_user.append(user_id)
+        post_collection.update_one({"_id":ObjectId(id)},{'$set': {'liked_user': liked_user}})
 
-    return resp
+    return redirect('/post/'+id)
 
 
 

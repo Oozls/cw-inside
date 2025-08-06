@@ -6,7 +6,7 @@
 {% block js %}<script defer src="{{ url_for('static', filename='scripts/index.js')}}"></script>{% endblock %}
 
 {% block main %}
-<div class="container">
+<div class="container" id="main_container">
     <div class="title">청원 인사이드에 오신 걸 환영합니다.</div>
     <div class="best">
         <div class="best_top">
@@ -45,5 +45,9 @@
         <p id="final_test_timer">로딩 중...</p>
         <p>남음</p>
     </div>
+</div>
+<div class="container" id="patch_container">
+    <p>최근 패치 내용</p>
+    <p>- 개추 시스템 버그 수정 (08/07)</p>
 </div>
 {% endblock %}
