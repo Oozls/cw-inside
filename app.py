@@ -279,7 +279,7 @@ def signup_register():
 
     if password != password2: return failed("재입력된 비밀번호가 불일치합니다.")
     
-    if not password.isalnum(): return failed("비밀번호의 형식이 올바르지 않습니다.<br>(영한, 숫자 가능)")
+    if not password.isalnum(): return failed("비밀번호의 형식이 올바르지 않습니다. (영한, 숫자 가능)")
 
     num_user = user_collection.find_one({'num': num})
     if num_user: return failed("이미 가입된 학번입니다.")

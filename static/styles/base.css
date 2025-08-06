@@ -82,7 +82,11 @@ main {
 }
 
 #login {
-    font-family: 'MaruBuri', 'Courier New', Courier;
+    color: var(--text-color);
+
+    -webkit-appearance: none;
+
+    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
     padding: 1em;
     background: transparent;
     border: solid 0px;
