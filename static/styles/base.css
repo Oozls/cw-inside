@@ -56,7 +56,7 @@ header .left * {
 }
 
 header .left p {
-    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
     font-size: clamp(10px, 2em, 30vw);
     font-weight: 900;
 }
@@ -68,6 +68,9 @@ main {
     padding-left: 25em;
     padding-right: 25em;
     margin-bottom: 3em;
+
+    color: var(--text-color);
+    font-family: 'Noto Sans K', 'Noto Sans';
 }
 
 @media (max-width: 1200px) {
