@@ -7,15 +7,11 @@ main .container {
     grid-row-gap: 5px;
 }
 
-.title, .best, .test_time, .final_test_time {
+.title, .best, .test_time, .mogo_time, .final_test_time {
     border: solid 1px var(--static-color);
     border-radius: 0.5em;
 
     box-shadow: 0 0 20px var(--static-color);
-}
-
-.test_time, .final_test_time {
-    padding: 0.5em;
 }
 
 .title {
@@ -26,20 +22,22 @@ main .container {
 }
 
 .best {
-    grid-area: 2 / 1 / 4 / 3 ;
+    grid-area: 2 / 1 / 5 / 3 ;
     padding: 1em;
 }
 
-.test_time, .final_test_time {
-    text-align: center;
-}
+.test_time { grid-area: 2 / 3 / 3 / 4; }
+.mogo_time { grid-area: 3 / 3 / 4 / 4; }
+.final_test_time { grid-area: 4 / 3 / 5 / 4; }
 
-.test_time p, .final_test_time p {
+.test_time, .mogo_time, .final_test_time { text-align: center; padding: 0.5em; }
+
+.test_time p, .mogo_time p, .final_test_time p {
     font-size: 0.8em;
     color: rgba(0,0,0,0.5)
 }
 
-#test_timer, #final_test_timer {
+#test_timer, #mogo_timer, #final_test_timer {
     font-family: 'MaruBuri', 'Courier New', Courier;
     font-size: 1.5em;
     font-weight: 400;

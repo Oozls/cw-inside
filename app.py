@@ -61,7 +61,7 @@ def unix_to_text(unix_time):
 @app.route('/', methods=['GET'])
 @app.route('/index')
 def index():
-    posts = list(post_collection.find().sort('gaechoo',-1))[:8]
+    posts = list(post_collection.find().sort('gaechoo',-1))[:5]
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
@@ -209,7 +209,7 @@ def listPage():
     if not isLogin():
         return '로그인이 필요합니다.', 401
 
-    posts = list(post_collection.find().sort("unix_time", -1))[:10]
+    posts = list(post_collection.find().sort("unix_time", -1))
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
