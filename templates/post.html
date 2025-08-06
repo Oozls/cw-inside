@@ -3,6 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block css %}<link href="{{ url_for('static', filename='styles/post.css')}}" rel="stylesheet"/>{% endblock %}
+{% block js %}<script src="{{ url_for('static', filename='scripts/post.js')}}"></script>{% endblock %}
 
 {% block main %}
 <div class="container">
@@ -23,8 +24,8 @@
     </div>
     <div class="gaechoo_cell">
         <p class="gaechoo">{{ post.gaechoo }}</p>
-        <form action="/like/{{ post._id }}" method="post">
-            <button type="submit" class="gaechoo_button">추천</button>
+        <form action="/like/{{ post._id }}" method="post" onsubmit="return throttleSubmit(this)">
+            <button type="submit" class="gaechoo_button" id="gaechoo_button">추천</button>
         </form>
     </div>
     <div class="comment_list_cell">
