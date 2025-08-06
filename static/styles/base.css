@@ -57,6 +57,7 @@ header .left * {
 
 header .left p {
     font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
+    color: var(--text-color);
     font-size: clamp(10px, 2em, 30vw);
     font-weight: 900;
 }
