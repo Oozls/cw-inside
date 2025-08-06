@@ -100,6 +100,7 @@ main {
 
 #login button {
     text-align: end;
+    color: var(--text-color);
 }
 
 #id_container {
@@ -109,6 +110,7 @@ main {
     font-weight: 600;
     background-color: transparent;
     border: none;
+    color: var(--text-color);
 }
 
 .container {
