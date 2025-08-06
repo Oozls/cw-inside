@@ -54,6 +54,7 @@ function updateFinalTestCountdown() {
 }
 
 updateTestCountdown();
+updateMogoCountdown();
 updateFinalTestCountdown();
 setInterval(updateTestCountdown, 1000);
 setInterval(updateMogoCountdown, 1000);
