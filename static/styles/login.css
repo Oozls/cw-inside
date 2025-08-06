@@ -1,0 +1,62 @@
+main .container {
+    padding: 50px 100px 50px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-form * {
+    font-family: 'Noto Sans K', 'Noto Sans';
+
+    margin: 5px 0 5px 0;
+
+    padding: 1em;
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+    box-shadow: 0 0 5px var(--static-color);
+
+    background-color: var(--background-color);
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--background-color);
+    }
+}
+
+#login-form button {
+    margin-top: 25px;
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}
+
+#no-account-form button{
+    background: transparent;
+    border: none;
+    color: rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px var(--static-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--accent-color);
+    }
+}

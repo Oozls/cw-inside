@@ -1,0 +1,115 @@
+main .container {
+    padding: 1em;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.title, .best, .test_time, .final_test_time {
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    box-shadow: 0 0 20px var(--static-color);
+}
+
+.test_time, .final_test_time {
+    padding: 0.5em;
+}
+
+.title {
+    font-family: 'MaruBuri', 'Courier New', Courier;
+    grid-area: 1 / 1 / 2 / 4 ;
+    text-align: center;
+    padding: 1em 0 1em 0;
+}
+
+.best {
+    grid-area: 2 / 1 / 4 / 3 ;
+    padding: 1em;
+}
+
+.test_time, .final_test_time {
+    text-align: center;
+}
+
+.test_time p, .final_test_time p {
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.5)
+}
+
+#test_timer, #final_test_timer {
+    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: var(--text-color);
+    margin: 0.5em 0 0.5em 0;
+}
+
+.best_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.best_top p {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+#list_button {
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}
+
+.best_body {
+    padding: 0;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+.post_cell {
+    margin: 0;
+    padding: 0.5em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    background-color: var(--background-color);
+
+    margin-bottom: 0.5em;
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--background-color);
+    }
+}
+
+/* .post_cell p { margin: 0; } */
+.post_sub_cell{ display: flex; flex-direction: row; justify-content: left; gap: 1em; }
+.post_title { font-size: 1em; font-weight: 500; margin: 0; }
+.post_user { font-size: 0.8em; color: rgba(0,0,0,0.5); margin: 0.15em 0 0 0; }
+.post_gaechoo { font-size: 0.8em; font-weight: 600; color: rgba(0,0,0,0.5); margin: 0; }

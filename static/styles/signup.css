@@ -1,0 +1,50 @@
+main .container {
+    padding: 50px 100px 50px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signup-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signup-form * {
+    font-family: 'MaruBuri', 'Courier New', Courier;
+
+    margin: 5px 0 5px 0;
+
+    padding: 1em;
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+    box-shadow: 0 0 5px var(--static-color);
+
+    background-color: var(--background-color);
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--background-color);
+    }
+}
+
+#signup-form button {
+    margin-top: 25px;
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}

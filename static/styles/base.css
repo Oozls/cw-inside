@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'MaruBuri';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
+}
+
+:root {
+    --text-color: #080806;
+    --background-color: #fafaf8;
+    --primary-color: #9b9870;
+    --secondary-color: #afc2a8;
+    --accent-color: #8aad8a;
+    --static-color: rgba(0, 0, 0, 0.1);
+    --hover-color: rgba(0, 0, 0, 0.05);
+}
+
+body {
+    padding-top: 0em;
+    margin: 0;
+    
+    font-weight: 300;
+    font-family: 'Noto Sans Kr', 'Courier New', Courier;
+    color: var(--text-color);
+
+    background-color: var(--background-color);
+}
+
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 100vw;
+    height: 3em;
+
+    padding: 1em;
+    border-bottom: solid 1px var(--static-color);
+    box-shadow: 0 5px 20px var(--static-color);
+
+    font-family: 'MaruBuri', 'Courier New', Courier;
+
+    margin-bottom: 3em;
+}
+
+header .left {
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    border: none;
+}
+
+header .left * {
+    margin: 0 20px 0 0;
+}
+
+header .left p {
+    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-size: clamp(10px, 2em, 30vw);
+    font-weight: 900;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding-left: 25em;
+    padding-right: 25em;
+    margin-bottom: 3em;
+}
+
+@media (max-width: 1200px) {
+  main {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+#login {
+    font-family: 'MaruBuri', 'Courier New', Courier;
+    padding: 1em;
+    background: transparent;
+    border: solid 0px;
+    border-radius: 1em;
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    &:focus {
+        background-color: var(--background-color);
+    }
+}
+
+#login button {
+    text-align: end;
+}
+
+#id_container {
+    text-align: end;
+    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-size: 1em;
+    font-weight: 600;
+    background-color: transparent;
+    border: none;
+}
+
+.container {
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    box-shadow: 0 0 20px var(--static-color);
+}
+
+.flash_text {
+    color: rgba(0,0,0,0.5);
+    font-size: 0.8em;
+    text-shadow: 1px 1px 2px var(--static-color);
+}

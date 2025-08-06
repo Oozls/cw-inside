@@ -1,0 +1,205 @@
+.container {
+    padding: 1em;
+}
+
+.back_button {
+    width: 2em;
+    height: 2em;
+    margin-bottom: 1em;
+    
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}
+
+.container button p {
+    font-size: 1em;
+    margin: 0;
+}
+
+.title_cell {
+    margin-bottom: 1em;
+}
+
+.title, .unix_time, .user, .gaechoo {
+    margin: 0;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.user {
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.unix_time {
+    color: rgba(0,0,0,0.5);
+    font-size: 0.8em;
+}
+
+.content_cell {
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+    padding: 1em;
+
+    overflow:hidden;
+}
+
+.gaechoo_cell {
+    margin: 2em 0 2em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.gaechoo {
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+    padding: 0 1em 0 1em;
+}
+
+.gaechoo_button {
+    margin-left: 2em;
+    width: 4em;
+    height: 2em;
+    
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}
+
+.comment_write_cell {
+    display: grid;
+    grid-template-columns: 3rf 1rf;
+    grid-template-rows: 3rf 1rf;
+    row-gap: 5px;
+}
+
+#comment_content {
+    grid-area: 1 / 1 / 2 / 3;
+
+    font-family: 'Noto Sans K', 'Noto Sans';
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    background-color: var(--background-color);
+    box-shadow: 0 0 2px var(--static-color);
+
+    height: 5em;
+    padding: 0.5em;
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--background-color);
+    }
+
+    resize: none;
+    overflow-y: auto;
+}
+
+.comment_button {
+    justify-self: end;
+    grid-area: 2 / 2 / 3 / 3;
+    width: 4em;
+    height: 2em;
+    
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}
+
+.comment_list_cell {
+    margin: 2em 0 2em 0;
+    padding: 0.5em;
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    background-color: var(--background-color);
+    box-shadow: 0 0 2px var(--static-color);
+}
+
+#dummy1 {
+    margin: 0;
+    font-size: 0.8em;
+    font-weight: 300;
+    color: rgba(0,0,0,0.8);
+}
+
+.comment_cell {
+    margin: 0.5em 0 0 0;
+    padding: 0.5em;
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    background-color: var(--background-color);
+    box-shadow: 0 0 2px var(--static-color);
+
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+.comment_cell p { margin: 0; }
+
+.comment_user { font-size: 0.9em; font-weight: 400; }
+
+.comment_unix_time { font-size: 0.8em; color: rgba(0,0,0,0.5); }
+
+.comment_content_cell {
+    margin: 0.5em 0 0 0;
+    padding: 0.5em;
+
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    background-color: var(--background-color);
+    box-shadow: 0 0 2px var(--static-color);
+}
+
+img {max-width: 100%;}

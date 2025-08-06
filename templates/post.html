@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block css %}<link href="{{ url_for('static', filename='styles/post.css')}}" rel="stylesheet"/>{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="button_cell">
+        <a href="/list" style="text-decoration:none; color: inherit;">
+            <button type="submit" class="back_button">
+                <p>&lt;</p>
+            </button>
+        </a>
+    </div>
+    <div class="title_cell">
+        <p class="title">{{ post.title }}</p>
+        <p class="user">{{ post.user_id }}</p>
+        <p class="unix_time">{{ post.unix_time }}</p>
+    </div>
+    <div class="content_cell">
+        {{ post.content.replace('\n', '<br>') | safe }}
+    </div>
+    <div class="gaechoo_cell">
+        <p class="gaechoo">{{ post.gaechoo }}</p>
+        <form action="/like/{{ post._id }}" method="post">
+            <button type="submit" class="gaechoo_button">추천</button>
+        </form>
+    </div>
+    <div class="comment_list_cell">
+        <p id="dummy1">댓글</p>
+        {% for comment in comments %}
+        <div class="comment_cell">
+            <div class="comment_title_cell">
+                <p class="comment_user">{{ comment.user_id }}</p>
+                <p class="comment_unix_time">{{ comment.unix_time }}</p>
+            </div>
+            <div class="comment_content_cell">
+                <p class="comment_content">{{ comment.content.replace('\n', '<br>') | safe }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="/write_comment/{{ post._id }}" method="post">
+        <div class="comment_write_cell">
+            <textarea name="content" id="comment_content" rows="1" placeholder="댓글 작성하기..." required></textarea>
+            <button type="submit" class="comment_button">작성</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

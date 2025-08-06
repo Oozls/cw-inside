@@ -1,0 +1,68 @@
+.container { padding: 1em; }
+.container form { display: flex; flex-direction: column; }
+.dummy { margin-top: 0; font-weight: 600; }
+
+.container form input, .container form textarea {
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    background-color: var(--background-color);
+
+    margin-bottom: 0.5em;
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--background-color);
+    }
+}
+
+.container form input {
+    font-size: 1em;
+    font-weight: 400;
+    font-family: 'Noto Sans K', 'Noto Sans';
+    padding: 0.5em 1.5em 0.5em 1.5em;
+}
+
+.container form textarea {
+    --font-size: 12pt;
+    --line-height: 1.25;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: 300;
+    font-family: 'Noto Sans K', 'Noto Sans';
+
+    height: calc(var(--font-size) * var(--line-height) * 25);
+
+    resize: none;
+}
+
+.container button {
+    width: 5em;
+    
+    border: none;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}
+
+.toastui-editor {
+    background-color: var(--background-color);
+}
+
+.toastui-editor-contents img { max-width: 100%; }
+
+#editor { margin-bottom: 1em;}

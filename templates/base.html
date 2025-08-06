@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>청원 인사이드{% block title %}{% endblock %}</title>
+    <link href="{{ url_for('static', filename='styles/base.css')}}" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logo.png')}}">
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+    <header>
+        <a href="/" style="text-decoration:none; color: inherit;">
+            <button class="left" type="submit">
+                <p>청원 인사이드</p>
+            </button>
+        </a>
+        <div class="right">
+            {% if session['_id'] %}
+            <form action="/logout" method="post">
+                <button type="submit" id="id_container">
+                    {{ session['num'] }} {{ session['name'] }}
+                </button>
+            </form>
+            {% else %}
+            <a href="/login" style="text-decoration:none; color: inherit;">
+                <button type="submit" id="login">로그인</button>
+            </a>
+            {% endif %}
+        </div>
+    </header>
+    <main>{% block main %}{% endblock %}</main>
+</body>
+</html>
