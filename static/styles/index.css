@@ -17,6 +17,8 @@
 
 #patch_container p { margin: 0; }
 
+#list_button { border-radius: 0.5em; }
+
 .title, .best, .test_time, .mogo_time, .final_test_time {
     border: solid 1px var(--static-color);
     border-radius: 0.5em;
@@ -64,22 +66,6 @@
 .best_top p {
     margin: 0;
     font-size: 0.8em;
-}
-
-#list_button {
-    order: none;
-    border-radius: 1em;
-
-    box-shadow: 0 0 5px var(--static-color);
-
-    color: white;
-    background-color: var(--secondary-color);
-
-    transition: all 0.25s;
-    &:hover {
-        color: var(--background-color);
-        background-color: var(--accent-color);
-    }
 }
 
 .best_body {

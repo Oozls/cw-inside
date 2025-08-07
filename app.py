@@ -7,7 +7,9 @@ from dotenv import load_dotenv
 from waitress import serve
 from datetime import datetime, timezone, timedelta
 from werkzeug.utils import secure_filename
-import os, time, json
+from bs4 import BeautifulSoup
+from blake3 import blake3
+import os, time, cloudinary.uploader, cloudinary.api, cloudinary, requests
 
 load_dotenv()
 
@@ -18,6 +20,13 @@ app = Flask(__name__)
 CORS(app)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = os.getenv("SECRET_KEY")
+STATIC_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
 
 
 
@@ -39,15 +48,29 @@ def isLogin():
     return True
 
 def isAdmin():
-    if '_id' not in session.keys():
-        return False
-
+    if '_id' not in session.keys(): return False
     user = user_collection.find_one({'_id':ObjectId(session['_id'])})
-
     if not user: return False
-
     return user['isAdmin']
 
+def img_to_hash(file):
+    file_bytes = file.read()
+    file.seek(0)
+    hash_name = blake3(file_bytes).hexdigest()
+    return hash_name
+
+def img_load(id):
+    resource = cloudinary.api.resource(id)
+    url = resource['secure_url']
+    response = requests.get(url)
+    if response.status_code == 200:
+        dir = os.path.dirname(os.path.abspath(__file__))
+        loc = os.path.join(dir,'static\\upload\\img\\'+resource["public_id"])
+        with open(loc, 'wb') as f:
+            f.write(response.content)
+        print(f"이미지 저장됨: {loc}")
+    else:
+        print(f"다운로드 실패: {response.status_code}")
 
 def unix_to_text(unix_time):
     utc_time = datetime.fromtimestamp(unix_time, timezone.utc)
@@ -100,6 +123,13 @@ def postAction():
 
     unix_time = time.time()
 
+    img_data = []
+    soup = BeautifulSoup(content, 'html.parser')
+    imgs = soup.select('img')
+    for img in imgs:
+        src = os.path.basename(img['src'])
+        img_data.append(src)
+
     post_collection.insert_one(
         {
             "title":title,
@@ -107,7 +137,8 @@ def postAction():
             "unix_time":unix_time,
             "gaechoo":0,
             "user_id":session['_id'],
-            "liked_user":[]
+            "liked_user":[],
+            "img":img_data
         })
     return redirect("/list/1")
 
@@ -115,7 +146,7 @@ def postAction():
 
 
 @app.route('/post/<id>')
-def post_id(id):
+def post(id):
     post = post_collection.find_one({"_id":ObjectId(id)})
     if not post:
         return '존재하지 않는 글입니다.', 404
@@ -127,8 +158,13 @@ def post_id(id):
     user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
     post['user_id'] = f'{user['num']} {user['name']}'
 
+    if 'img' in post.keys():
+        for img in post['img']:
+            if not os.path.exists(url_for('static', filename='upload/img/'+img)): img_load(img)
+
     comments = list(comment_collection.find({'post_id':id}).sort("unix_time", -1))
     for comment in comments:
+        print(dict(comment))
         comment['unix_time'] = unix_to_text(comment['unix_time'])
         user1 = user_collection.find_one({'_id':ObjectId(comment['user_id'])})
         comment['user_id'] = f'{user1['num']} {user1['name']}'
@@ -143,9 +179,18 @@ def upload_image():
         return '로그인이 필요합니다.', 401
 
     image = request.files['image']
-    filename = secure_filename(image.filename)
-    image.save(os.path.join('static/upload/img', filename))
-    url = url_for('static', filename=f'upload/img/{filename}')
+    ext = os.path.split(image.filename)[1]
+    filename = img_to_hash(image)
+
+    url = url_for('static', filename=f'upload/img/{filename+ext}')
+    result = cloudinary.uploader.upload(
+            image,
+            public_id=filename+ext,
+            overwrite=False
+    )
+    image.seek(0)
+    image.save(os.path.join('static/upload/img', filename+ext))
+
     return jsonify({'url': url})
 
 

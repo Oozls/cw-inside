@@ -8,11 +8,11 @@
 <div class="container">
     Sign Up
     <form action="/signup_register" method="POST" id="signup-form">
-        <input type="text" name="num" placeholder="학번 (ex. 2101)" autocomplete="off" required>
-        <input type="text" name="name" placeholder="이름 (실명)" autocomplete="off" required>
-        <input type="password" name="password" placeholder="비밀번호" autocomplete="off" required>
-        <input type="password" name="password2" placeholder="비밀번호 재입력" autocomplete="off" required>
-        <button type="submit">계정 생성</button>
+        <input type="text" class="select_container" name="num" placeholder="학번 (ex. 2101)" autocomplete="off" required>
+        <input type="text" class="select_container" name="name" placeholder="이름 (실명)" autocomplete="off" required>
+        <input type="password" class="select_container" name="password" placeholder="비밀번호" autocomplete="off" required>
+        <input type="password" class="select_container" name="password2" placeholder="비밀번호 재입력" autocomplete="off" required>
+        <button type="submit" class="button">계정 생성</button>
     </form>
     {% with messages = get_flashed_messages() %}
         {% if messages %}

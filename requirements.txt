@@ -1,5 +1,10 @@
+beautifulsoup4==4.13.4
+blake3==1.0.5
 blinker==1.9.0
+bs4==0.0.2
+certifi==2025.8.3
 click==8.2.1
+cloudinary==1.44.1
 colorama==0.4.6
 dnspython==2.7.0
 Flask==3.1.1
@@ -10,5 +15,9 @@ Jinja2==3.1.6
 MarkupSafe==3.0.2
 pymongo==4.13.2
 python-dotenv==1.1.1
+six==1.17.0
+soupsieve==2.7
+typing_extensions==4.14.1
+urllib3==2.5.0
 waitress==3.0.2
 Werkzeug==3.1.3

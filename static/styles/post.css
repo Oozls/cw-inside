@@ -127,6 +127,7 @@
         background-color: var(--background-color);
     }
 
+    font-size: 1em;
     resize: none;
     overflow-y: auto;
 }
