@@ -62,18 +62,6 @@ def img_to_hash(file):
     hash_name = blake3(file_bytes).hexdigest()
     return hash_name
 
-def img_load(id):
-    resource = cloudinary.api.resource(id)
-    url = resource['secure_url']
-    response = requests.get(url)
-    if response.status_code == 200:
-        loc = url_for('static', filename=resource["public_id"])
-        with open(loc, 'wb') as f:
-            f.write(response.content)
-        print(f"이미지 저장됨: {loc}")
-    else:
-        print(f"다운로드 실패: {response.status_code}")
-
 def unix_to_text(unix_time):
     utc_time = datetime.fromtimestamp(unix_time, timezone.utc)
     kst = timezone(timedelta(hours=9))
@@ -141,7 +129,8 @@ def postAction():
             "user_id":session['_id'],
             "liked_user":[],
             "img":img_data,
-            "views":1
+            "views":1,
+            "isAnonymous": True if request.form['isAnonymous'] == "on" else False
         })
     return redirect("/list/1")
 
@@ -159,7 +148,13 @@ def post(id):
     
     post['unix_time'] = unix_to_text(post['unix_time'])
     user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-    post['user_id'] = f'{user['num']} {user['name']}'
+
+    if 'isAnonymous' not in post.keys():
+        post['isAnonymous'] = False
+        post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'isAnonymous':False}})
+
+    if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
+    else: post['user_id'] = f'{user['num']} {user['name']}'
 
     # if 'img' in post.keys():
     #     for img in post['img']:
@@ -275,7 +270,13 @@ def listPage(page):
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-        post['user_id'] = f'{user['num']} {user['name']}'
+
+        if 'isAnonymous' not in post.keys():
+            post['isAnonymous'] = False
+            post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'isAnonymous':False}})
+        
+        if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
+        else: post['user_id'] = f'{user['num']} {user['name']}'
 
         if 'views' not in post.keys():
             post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':1}})
