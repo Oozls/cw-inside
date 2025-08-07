@@ -31,7 +31,7 @@
     margin-bottom: 1em;
 }
 
-.title, .unix_time, .user, .gaechoo {
+.title, .unix_time, .user, .gaechoo, .view_text {
     margin: 0;
 }
 
@@ -44,7 +44,7 @@
     font-weight: 400;
 }
 
-.unix_time {
+.unix_time, .view_text {
     color: rgba(0,0,0,0.5);
     font-size: 0.8em;
 }

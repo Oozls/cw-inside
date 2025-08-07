@@ -141,7 +141,7 @@ def postAction():
             "user_id":session['_id'],
             "liked_user":[],
             "img":img_data,
-            "views":0
+            "views":1
         })
     return redirect("/list/1")
 
@@ -167,9 +167,10 @@ def post(id):
 
     if 'views' not in post.keys():
         post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':0}})
-        post['views'] = 0
+        post['views'] = 1
 
     post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$inc':{'views':1}})
+    post['views'] += 1
 
     comments = list(comment_collection.find({'post_id':id}).sort("unix_time", -1))
     for comment in comments:
@@ -277,7 +278,7 @@ def listPage(page):
         post['user_id'] = f'{user['num']} {user['name']}'
 
         if 'views' not in post.keys():
-            post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':0}})
+            post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':1}})
 
     return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
 
