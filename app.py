@@ -28,6 +28,9 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
 
+print(f'__file__: {__file__}')
+print(f'dir: {os.path.dirname(__file__)}')
+
 
 
 
