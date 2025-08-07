@@ -160,9 +160,9 @@ def post(id):
     user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
     post['user_id'] = f'{user['num']} {user['name']}'
 
-    if 'img' in post.keys():
-        for img in post['img']:
-            if not os.path.exists(url_for('static', filename='upload/img/'+img)): img_load(img)
+    # if 'img' in post.keys():
+    #     for img in post['img']:
+    #         if not os.path.exists(url_for('static', filename='upload/img/'+img)): img_load(img)
 
     comments = list(comment_collection.find({'post_id':id}).sort("unix_time", -1))
     for comment in comments:
@@ -190,10 +190,9 @@ def upload_image():
             public_id=filename+ext,
             overwrite=False
     )
-    image.seek(0)
 
-    dir = os.path.dirname(__file__)
-    image.save(os.path.join(dir, 'static\\upload\\img\\'+filename+ext))
+    resource = cloudinary.api.resource(filename+ext)
+    url = resource['secure_url']
 
     return jsonify({'url': url})
 
