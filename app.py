@@ -109,7 +109,7 @@ def postAction():
             "user_id":session['_id'],
             "liked_user":[]
         })
-    return redirect("/list")
+    return redirect("/list/1")
 
 
 
@@ -162,7 +162,7 @@ def like(id):
 
     user_id = session['_id']
 
-    if not post['liked_user']:
+    if 'liked_user' not in post.keys():
         post_collection.update_one({"_id":ObjectId(id)},{'$set': {'liked_user':[]}})
     
     post = post_collection.find_one({"_id":ObjectId(id)})
@@ -207,17 +207,20 @@ def write_comment(id):
 
 
 
-@app.route('/list', methods=['GET', 'POST'])
-def listPage():
+@app.route('/list/<page>', methods=['GET', 'POST'])
+def listPage(page):
+    page = int(page)
     if not isLogin():
         return '로그인이 필요합니다.', 401
+    if page <= 0:
+        return '잘못된 접근입니다.', 403
 
-    posts = list(post_collection.find().sort("unix_time", -1))
+    posts = list(post_collection.find().sort("unix_time", -1))[((page-1)*10):page*10]
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
         post['user_id'] = f'{user['num']} {user['name']}'
-    return render_template("list.html", posts=posts, count=len(list((post_collection.find()))))
+    return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
 
 
 
@@ -236,7 +239,7 @@ def request_login():
     name = request.form['name']
     password = request.form['password']
 
-    user = user_collection.find({'num': num})[0]
+    user = user_collection.find_one({'num': num})
     if not user:
         flash("가입되지 않은 학번입니다.")
         return redirect('/login')
@@ -315,7 +318,7 @@ def confirm():
 @app.route('/confirm_account', methods=['POST'])
 def confirm_account():
     _id = request.form['_id']
-    user = pending_user_collection.find({"_id":ObjectId(_id)})[0]
+    user = pending_user_collection.find_one({"_id":ObjectId(_id)})
     pending_user_collection.delete_one({"_id":ObjectId(_id)})
     user_collection.insert_one(user)
     return redirect('/confirm')

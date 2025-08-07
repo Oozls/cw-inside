@@ -129,3 +129,19 @@ main {
     font-size: 0.8em;
     text-shadow: 1px 1px 2px var(--static-color);
 }
+
+.button {
+    border: 0;
+    border-radius: 1em;
+
+    box-shadow: 0 0 5px var(--static-color);
+
+    color: white;
+    background-color: var(--secondary-color);
+
+    transition: all 0.25s;
+    &:hover {
+        color: var(--background-color);
+        background-color: var(--accent-color);
+    }
+}

@@ -1,22 +1,22 @@
-main .container {
+#main_container {
     padding: 1em;
     display: flex;
     flex-direction: column;
     justify-items: center;
 }
 
-.container .top {
+#main_container .top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1em;
 }
 
-.container .top p { font-size: 1em; color: rgba(0,0,0,0.8); font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans'; }
+#main_container .top p { font-size: 1em; color: rgba(0,0,0,0.8); font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans'; }
 
-.container p, .container a, .container a button { margin: 0; }
+#main_container p, #main_container a, #main_container a button { margin: 0; }
 
-.container a button {
+#write_button {
     width: 6em;
     
     border: none;
@@ -90,3 +90,22 @@ main .container {
 .title { font-weight: 600; }
 .unix_time { font-size: 0.5em; }
 .gaechoo, .name_cell { font-size: 0.8em; font-weight: 600; color: rgba(0,0,0,0.5); }
+
+
+
+#button_cell {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1em;
+}
+
+#left_button, #right_button { padding: 0.5em; font-size: 1em; font-weight: 900; width: 2em; }
+
+#page_container {
+    padding: 0 1em 0 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

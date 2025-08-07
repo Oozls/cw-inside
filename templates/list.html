@@ -5,23 +5,38 @@
 {% block css %}<link href="{{ url_for('static', filename='styles/list.css')}}" rel="stylesheet"/>{% endblock %}
 
 {% block main %}
-<div class="container">
+<div class="container" id="main_container">
     <div class="top">
         <p>게시물 목록 ({{ count }}개)</p>
-        <a href="write">
-            <button>글 작성하기</button>
+        <a href="/write">
+            <button id="write_button">글 작성하기</button>
         </a>
     </div>
-    {% for post in posts %}
-    <a href="post/{{ post._id }}" style="text-decoration:none; color: inherit;">
-        <div class="post">
-            <div class="title_cell"><p class="title">{{ post.title }}</p></div>
-            <div class="unix_time_cell"><p class="unix_time">{{ post.unix_time }}</p></div>
-            <div class="name_cell"><p class="name">{{ post.user_id }}</p></div>
-            <div class="gaechoo_cell"><p class="gaechoo">추천 : {{ post.gaechoo }}</p></div>
-            <input type="hidden" name="_id" value="{{ post._id }}">
+    <div>
+        {% for post in posts %}
+        <a href="/post/{{ post._id }}" style="text-decoration:none; color: inherit;">
+            <div class="post">
+                <div class="title_cell"><p class="title">{{ post.title }}</p></div>
+                <div class="unix_time_cell"><p class="unix_time">{{ post.unix_time }}</p></div>
+                <div class="name_cell"><p class="name">{{ post.user_id }}</p></div>
+                <div class="gaechoo_cell"><p class="gaechoo">추천 : {{ post.gaechoo }}</p></div>
+                <input type="hidden" name="_id" value="{{ post._id }}">
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div id="button_cell">
+        {% if (page-1 != 0) %}
+        <a href="/list/{{ page-1 }}">
+            <button class="button" id="left_button">&lt;</button>
+        </a>
+        {% endif %}
+        <div class="container" id="page_container">
+            <p id="page_num">{{ page }}</p>
         </div>
-    </a>
-    {% endfor %}
+        <a href="/list/{{ page+1 }}">
+            <button class="button" id="right_button">&gt;</button>
+        </a>
+    </div>
 </div>
 {% endblock %}
