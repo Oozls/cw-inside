@@ -67,8 +67,7 @@ def img_load(id):
     url = resource['secure_url']
     response = requests.get(url)
     if response.status_code == 200:
-        dir = os.path.dirname(os.path.abspath(__file__))
-        loc = os.path.join(dir,'static\\upload\\img\\'+resource["public_id"])
+        loc = url_for('static', filename=resource["public_id"])
         with open(loc, 'wb') as f:
             f.write(response.content)
         print(f"이미지 저장됨: {loc}")
@@ -193,7 +192,7 @@ def upload_image():
     )
     image.seek(0)
 
-    dir = os.path.dirname(os.path.abspath(__file__))
+    dir = os.path.dirname(__file__)
     image.save(os.path.join(dir, 'static\\upload\\img\\'+filename+ext))
 
     return jsonify({'url': url})
