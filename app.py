@@ -189,7 +189,9 @@ def upload_image():
             overwrite=False
     )
     image.seek(0)
-    image.save(os.path.join('static/upload/img', filename+ext))
+
+    dir = os.path.dirname(os.path.abspath(__file__))
+    image.save(os.path.join(dir, 'static\\upload\\img\\'+filename+ext))
 
     return jsonify({'url': url})
 
