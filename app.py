@@ -9,7 +9,7 @@ from datetime import datetime, timezone, timedelta
 from werkzeug.utils import secure_filename
 from bs4 import BeautifulSoup
 from blake3 import blake3
-import os, time, cloudinary.uploader, cloudinary.api, cloudinary, requests
+import os, time, cloudinary.uploader, cloudinary.api, cloudinary, requests, logging
 
 load_dotenv()
 
@@ -28,8 +28,9 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
 
-app.logger.info(f'__file__: {__file__}')
-app.logger.info(f'dir: {os.path.dirname(__file__)}')
+logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(sys.stdout)])
+logging.info(f'__file__: {__file__}')
+logging.info(f'dir: {os.path.dirname(__file__)}')
 
 
 
