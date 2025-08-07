@@ -140,7 +140,8 @@ def postAction():
             "gaechoo":0,
             "user_id":session['_id'],
             "liked_user":[],
-            "img":img_data
+            "img":img_data,
+            "views":0
         })
     return redirect("/list/1")
 
@@ -163,6 +164,12 @@ def post(id):
     # if 'img' in post.keys():
     #     for img in post['img']:
     #         if not os.path.exists(url_for('static', filename='upload/img/'+img)): img_load(img)
+
+    if 'views' not in post.keys():
+        post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':0}})
+        post['views'] = 0
+
+    post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$inc':{'views':1}})
 
     comments = list(comment_collection.find({'post_id':id}).sort("unix_time", -1))
     for comment in comments:
@@ -268,6 +275,10 @@ def listPage(page):
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
         post['user_id'] = f'{user['num']} {user['name']}'
+
+        if 'views' not in post.keys():
+            post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':0}})
+
     return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
 
 
