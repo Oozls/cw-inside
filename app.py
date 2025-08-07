@@ -78,7 +78,9 @@ def index():
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-        post['user_id'] = f'{user['num']} {user['name']}'
+
+        if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
+        else: post['user_id'] = f'{user['num']} {user['name']}'        
     return render_template('index.html', posts=posts)
 
 
@@ -149,20 +151,12 @@ def post(id):
     post['unix_time'] = unix_to_text(post['unix_time'])
     user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
 
-    if 'isAnonymous' not in post.keys():
-        post['isAnonymous'] = False
-        post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'isAnonymous':False}})
-
     if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
     else: post['user_id'] = f'{user['num']} {user['name']}'
 
     # if 'img' in post.keys():
     #     for img in post['img']:
     #         if not os.path.exists(url_for('static', filename='upload/img/'+img)): img_load(img)
-
-    if 'views' not in post.keys():
-        post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':0}})
-        post['views'] = 1
 
     post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$inc':{'views':1}})
     post['views'] += 1
@@ -212,9 +206,6 @@ def like(id):
         return '로그인이 필요합니다.', 401
 
     user_id = session['_id']
-
-    if 'liked_user' not in post.keys():
-        post_collection.update_one({"_id":ObjectId(id)},{'$set': {'liked_user':[]}})
     
     post = post_collection.find_one({"_id":ObjectId(id)})
     liked_user = post['liked_user']
@@ -270,10 +261,6 @@ def listPage(page):
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-
-        if 'isAnonymous' not in post.keys():
-            post['isAnonymous'] = False
-            post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'isAnonymous':False}})
         
         if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
         else: post['user_id'] = f'{user['num']} {user['name']}'
