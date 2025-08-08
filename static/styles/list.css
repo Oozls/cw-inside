@@ -16,6 +16,8 @@
 
 #main_container .top p, #main_container a, #main_container a button, #page_num { margin: 0; }
 
+.top_left { display: flex; flex-direction: row; justify-items: start; align-items: center; gap: 1em; }
+
 #write_button {
     width: 6em;
     
@@ -24,7 +26,7 @@
 
     box-shadow: 0 0 5px var(--static-color);
 
-    color: white;
+    color: var(--background-color);
     background-color: var(--secondary-color);
 
     transition: all 0.25s;
@@ -62,7 +64,7 @@
     }
 }
 
-@media (max-width: 1200px) { .post { letter-spacing: -0.05em; } }
+@media (max-width: 600px) { .post { letter-spacing: -0.05em; } }
 
 .post * {
     white-space: nowrap;

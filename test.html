@@ -7,38 +7,8 @@
 <!-- ✅ 언어 번역 파일 (한국어) -->
 <script src="https://uicdn.toast.com/editor/latest/i18n/ko-kr.js"></script>
 
-<div id="editor"></div>
-<form action="/postAction" method="POST" enctype="multipart/form-data">
-  <input type="hidden" name="content" id="realContent">
-  <button type="submit">제출</button>
-</form>
-
+<div id="editor" style="height: 200px; width: 200px; border: 1px solid black;">
+<p style="display: flex; flex-direction: column; align-items: center;">hihi</p>
+</div>
 <script>
-  const editor = new toastui.Editor({
-    el: document.querySelector('#editor'),
-    height: '500px',
-    initialEditType: 'wysiwyg',
-    previewStyle: 'tab',
-    hideModeSwitch: true,
-    language: 'ko-KR',
-    hooks: {
-      async addImageBlobHook(blob, callback) {
-        const formData = new FormData();
-        formData.append('image', blob);
-
-        const res = await fetch('/upload_image', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        callback(data.url, 'image');  // 삽입 위치에 이미지 URL 넣어줌
-      }
-    }
-  });
-
-  // 제출 시 에디터 내용을 hidden input에 넣기
-  document.querySelector('form').addEventListener('submit', function() {
-    const markdown = editor.getMarkdown();  // 또는 getHTML()
-    document.querySelector('#realContent').value = markdown;
-  });
 </script>

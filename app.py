@@ -294,6 +294,20 @@ def listPage(page):
 
     return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
 
+@app.route('/list/<page>/<category>', methods=['GET', 'POST'])
+def listCategoryPage(page, category):
+    page = int(page)
+    if not isLogin():
+        return '로그인이 필요합니다.', 401
+    if page <= 0:
+        return '잘못된 접근입니다.', 403
+    
+    posts = list(post_collection.find({'type':category}).sort("unix_time", -1))[((page-1)*10):page*10]
+    for post in posts:
+        process_post(post, post['_id'])
+
+    return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
+
 
 
 
