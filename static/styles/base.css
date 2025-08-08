@@ -39,7 +39,7 @@ header {
     border-bottom: solid 1px var(--static-color);
     box-shadow: 0 5px 20px var(--static-color);
 
-    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-family: 'MaruBuri', 'Noto Sans Kr', 'Noto Sans';
 
     margin-bottom: 3em;
 }

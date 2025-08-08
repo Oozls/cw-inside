@@ -11,9 +11,14 @@
     <div class="best">
         <div class="best_top">
             <p>베스트 Top 5 글</p>
-            <a href="/list/1" style="text-decoration:none; color: inherit;">
-                <button class="button" id="list_button">글 보러 가기</button>
-            </a>
+            <div>
+                <a href="/list/1" style="text-decoration:none; color: inherit;">
+                    <button class="button" id="list_button">글 보러 가기</button>
+                </a>
+                <a href="/write" style="text-decoration:none; color: inherit;">
+                    <button class="button" id="write_button">작성</button>
+                </a>
+            </div>      
         </div>
         <div class="best_body">
             {% for post in posts %}

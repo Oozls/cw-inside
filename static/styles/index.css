@@ -17,7 +17,8 @@
 
 #patch_container p { margin: 0; }
 
-#list_button { border-radius: 0.5em; }
+#list_button { border-radius: 0.5em; margin: 0.2em; }
+#write_button { border-radius: 0.5em; margin: 0.2em; }
 
 .title, .best, .test_time, .mogo_time, .final_test_time {
     border: solid 1px var(--static-color);
