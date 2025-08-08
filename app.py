@@ -150,6 +150,7 @@ def postAction():
 
     title = request.form['title']
     content = request.form.get('content')
+    isAnonymous = True if request.form.get('isAnonymous') == "on" else False
 
     unix_time = time.time()
 
@@ -160,19 +161,19 @@ def postAction():
         src = os.path.basename(img['src'])
         img_data.append(src)
 
-    post_collection.insert_one(
-        {
+    post_collection.insert_one({
             "title":title,
             "content":content,
             "unix_time":unix_time,
             "gaechoo":0,
-            "user_id":session['_id'],
-            "type":request.form['type'],
+            "user_id": session['_id'],
+            "type": request.form['type'],
             "liked_user":[],
-            "img":img_data,
+            "img": img_data,
             "views":1,
-            "isAnonymous": True if request.form['isAnonymous'] == "on" else False
+            "isAnonymous": isAnonymous
         })
+
     return redirect("/list/1")
 
 
