@@ -27,12 +27,17 @@
                     <div class="post_sub_cell">
                         <p class="post_title">
                             {% if (post.type == "none") %}
-                        {{ post.title }}
-                        {% else %}
-                        [{{ post.type }}] {{ post.title }}
-                        {% endif %}
+                            {{ post.title }}
+                            {% else %}
+                            [{{ post.type }}] {{ post.title }}
+                            {% endif %}
                         </p>
                         <p class="post_user">{{ post.user_id }}</p>
+                        {% if (post.manager == "orange") %}
+                        <img src="{{ url_for('static', filename='img/orange_small.png') }}" alt="" class="manager_icon orange_icon">
+                        {% elif (post.manager == "blue") %}
+                        <img src="{{ url_for('static', filename='img/blue_small.png') }}" alt="" class="manager_icon blue_icon">
+                        {% endif %}
                     </div>
                     <p class="post_gaechoo">추천 : {{ post.gaechoo }}</p>
                     <p class="post_id" hidden>{{ post._id }}</p>
@@ -60,6 +65,6 @@
 <div class="container" id="patch_container">
     <p>최근 패치 내용</p>
     <p>- 개추 시스템 버그 수정, 이미지 기능 시스템 개편 (08/07)</p>
-    <p>- 익명 시스템, 글 말머리 시스템 추가 (08/07)</p>
+    <p>- 익명 시스템, 글 말머리 시스템 추가, 조회수 복사 버그 수정 (08/08)</p>
 </div>
 {% endblock %}

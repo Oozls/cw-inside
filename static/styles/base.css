@@ -4,6 +4,13 @@
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
 }
 
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(/html/font/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(/html/font/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(/html/font/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(/html/font/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(/html/font/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(/html/font/NotoSansKR-Black.otf) format('opentype');}
+
 :root {
     --text-color: #080806;
     --background-color: #fafaf8;
@@ -49,10 +56,7 @@ header .left {
     flex-direction: row;
     background-color: transparent;
     border: none;
-}
-
-header .left * {
-    margin: 0 20px 0 0;
+    margin: 0;
 }
 
 header .left p {
@@ -75,11 +79,15 @@ main {
 }
 
 @media (max-width: 1200px) {
-  main {
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
+    header { margin-bottom: 5%; }
+    main { padding-left: 5vw; padding-right: 5vw; }
+    .left { letter-spacing: -0.1em; }
 }
+
+@media (max-width: 300px) {
+    header { font-size: 5vw; }
+}
+
 
 #login {
     color: var(--text-color);

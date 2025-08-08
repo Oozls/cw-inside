@@ -55,6 +55,16 @@ def record_view(id):
         return True
     else: return False
 
+def isOrange(id):
+    user = user_collection.find_one({'_id':ObjectId(id)})
+    if user['manager'] == 'orange': return True
+    return False
+
+def isBlue(id):
+    user = user_collection.find_one({'_id':ObjectId(id)})
+    if user['manager'] == 'blue': return True
+    return False
+
 def isLogin():
     if 'num' not in session.keys(): return False
     elif not session['num']: return False
@@ -78,6 +88,28 @@ def unix_to_text(unix_time):
     kst_time = utc_time.astimezone(kst)
     return kst_time.strftime('%Y년 %m월 %d일 %H:%M')
 
+def process_post(post, id):
+    post['unix_time'] = unix_to_text(post['unix_time'])
+    user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
+
+    if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
+    else: post['user_id'] = f'{user['num']} {user['name']}'
+
+    type_list = {
+            'none': 'none',
+            'talk': '잡담',
+            'picture': '짤',
+            'school': '학교',
+            'game': '게임',
+            'politics': '정치'
+    }
+    post['type'] = type_list[post['type']]
+
+    if isOrange(user['_id']) and not post['isAnonymous']: post['manager'] = 'orange'
+    elif isBlue(user['_id']) and not post['isAnonymous']: post['manager'] = 'blue'
+    else: post['manager'] = 'normal'
+    return post
+
 
 
 
@@ -86,21 +118,7 @@ def unix_to_text(unix_time):
 def index():
     posts = list(post_collection.find().sort('gaechoo',-1))[:5]
     for post in posts:
-        post['unix_time'] = unix_to_text(post['unix_time'])
-        user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-
-        type_list = {
-            'none': 'none',
-            'talk': '잡담',
-            'picture': '짤',
-            'school': '학교',
-            'game': '게임',
-            'politics': '정치'
-        }
-        post['type'] = type_list[post['type']]
-
-        if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
-        else: post['user_id'] = f'{user['num']} {user['name']}'        
+        process_post(post, post['_id'])
     return render_template('index.html', posts=posts)
 
 
@@ -169,28 +187,13 @@ def post(id):
     if not isLogin():
         return '로그인이 필요합니다.', 401
     
-    post['unix_time'] = unix_to_text(post['unix_time'])
-    user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-
-    if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
-    else: post['user_id'] = f'{user['num']} {user['name']}'
-
-    type_list = {
-            'none': 'none',
-            'talk': '잡담',
-            'picture': '짤',
-            'school': '학교',
-            'game': '게임',
-            'politics': '정치'
-    }
-    post['type'] = type_list[post['type']]
+    process_post(post, id)
     
     isNewlyViewed = record_view(id)
     if isNewlyViewed: post['views'] += 1
 
     comments = list(comment_collection.find({'post_id':id}).sort("unix_time", -1))
     for comment in comments:
-        print(dict(comment))
         comment['unix_time'] = unix_to_text(comment['unix_time'])
         user1 = user_collection.find_one({'_id':ObjectId(comment['user_id'])})
         comment['user_id'] = f'{user1['num']} {user1['name']}'
@@ -286,21 +289,7 @@ def listPage(page):
     
     posts = list(post_collection.find().sort("unix_time", -1))[((page-1)*10):page*10]
     for post in posts:
-        post['unix_time'] = unix_to_text(post['unix_time'])
-        user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-        
-        if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
-        else: post['user_id'] = f'{user['num']} {user['name']}'
-
-        type_list = {
-            'none': 'none',
-            'talk': '잡담',
-            'picture': '짤',
-            'school': '학교',
-            'game': '게임',
-            'politics': '정치'
-        }
-        post['type'] = type_list[post['type']]
+        process_post(post, post['_id'])
 
     return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
 

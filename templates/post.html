@@ -22,7 +22,14 @@
             [{{ post.type }}] {{ post.title }}
             {% endif %}
         </p>
-        <p class="user">{{ post.user_id }}</p>
+        <div class="user_cell">
+            <p class="user">{{ post.user_id }}</p>
+            {% if (post.manager == "orange") %}
+            <img src="{{ url_for('static', filename='img/orange_small.png') }}" alt="" class="manager_icon orange_icon">
+            {% elif (post.manager == "blue") %}
+            <img src="{{ url_for('static', filename='img/blue_small.png') }}" alt="" class="manager_icon blue_icon">
+            {% endif %}
+        </div>
         <p class="view_text">조회수 : {{ post.views }}</p>
         <p class="unix_time">{{ post.unix_time }}</p>
     </div>

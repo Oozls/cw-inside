@@ -96,6 +96,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     border: solid 1px var(--static-color);
     border-radius: 0.5em;
@@ -116,7 +117,14 @@
 }
 
 /* .post_cell p { margin: 0; } */
-.post_sub_cell{ display: flex; flex-direction: row; justify-content: left; gap: 1em; }
+.post_sub_cell{ display: flex; flex-direction: row; justify-content: left; align-items: center; }
 .post_title { font-size: 1em; font-weight: 500; margin: 0; }
-.post_user { font-size: 0.8em; color: rgba(0,0,0,0.5); margin: 0.15em 0 0 0; }
+.post_user { font-size: 0.8em; color: rgba(0,0,0,0.5); margin: 0 0 0 1em; }
 .post_gaechoo { font-size: 0.8em; font-weight: 600; color: rgba(0,0,0,0.5); margin: 0; }
+
+.manager_icon {
+    margin: 0 0 0 0.2em;
+    padding: 0;
+    width: 0.8em;
+    height: auto;
+}
