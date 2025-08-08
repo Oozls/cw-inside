@@ -25,7 +25,13 @@
             <a href="/post/{{ post._id }}" style="text-decoration: none; color: inherit;">
                 <div class="post_cell">
                     <div class="post_sub_cell">
-                        <p class="post_title">{{ post.title }}</p>
+                        <p class="post_title">
+                            {% if (post.type == "none") %}
+                        {{ post.title }}
+                        {% else %}
+                        [{{ post.type }}] {{ post.title }}
+                        {% endif %}
+                        </p>
                         <p class="post_user">{{ post.user_id }}</p>
                     </div>
                     <p class="post_gaechoo">추천 : {{ post.gaechoo }}</p>

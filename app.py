@@ -45,6 +45,16 @@ comment_collection = db['comment']
 
 
 
+def record_view(id):
+    if 'viewed_post' not in session.keys(): session['viewed_post'] = []
+    elif not session['viewed_post']: session['viewed_post'] = []
+    
+    if id not in session['viewed_post']:
+        session['viewed_post'] = session['viewed_post'] + [id]
+        post_collection.update_one({'_id':ObjectId(id)}, {'$inc':{'views':1}})
+        return True
+    else: return False
+
 def isLogin():
     if 'num' not in session.keys(): return False
     elif not session['num']: return False
@@ -78,6 +88,16 @@ def index():
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
         user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
+
+        type_list = {
+            'none': 'none',
+            'talk': '잡담',
+            'picture': '짤',
+            'school': '학교',
+            'game': '게임',
+            'politics': '정치'
+        }
+        post['type'] = type_list[post['type']]
 
         if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
         else: post['user_id'] = f'{user['num']} {user['name']}'        
@@ -165,8 +185,8 @@ def post(id):
     }
     post['type'] = type_list[post['type']]
     
-    post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$inc':{'views':1}})
-    post['views'] += 1
+    isNewlyViewed = record_view(id)
+    if isNewlyViewed: post['views'] += 1
 
     comments = list(comment_collection.find({'post_id':id}).sort("unix_time", -1))
     for comment in comments:
