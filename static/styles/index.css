@@ -7,6 +7,18 @@
     grid-row-gap: 5px;
 }
 
+#best_top_button_cell {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+@media (max-width: 500px) {
+    #main_container { display: flex; flex-direction: column; place-content: center; }
+    #best_top_button_cell { flex-direction: column; }
+    .post_user { position: absolute; opacity: 0; }
+}
+
 #patch_container {
     margin-top: 2em;
     padding: 2em;

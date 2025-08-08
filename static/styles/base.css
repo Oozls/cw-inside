@@ -109,7 +109,7 @@ main {
 
 #id_container {
     text-align: end;
-    font-family: 'MaruBuri', 'Courier New', Courier;
+    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
     font-size: 1em;
     font-weight: 600;
     background-color: transparent;
@@ -161,4 +161,86 @@ main {
         color: var(--background-color);
         background-color: var(--accent-color);
     }
+}
+
+.checkbox_container {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox_container label {
+    cursor: pointer;
+    display: flex;
+}
+
+.checkbox_container input[type="checkbox"] {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox_container label::before {
+    content: '';
+    width: 1em;
+    height: 1em;
+    border-radius: 0.15em;
+    margin-top: 3px;
+    margin-right: 0.5em;
+    border: 0.05em solid var(--accent-color);
+    box-shadow: 0 5px 20px var(--static-color);
+}
+
+.checkbox_container label:hover::before, .checkbox_container input[type="checkbox"]:hover + label::before {
+    background-color: var(--secondary-color);
+}
+
+.checkbox_container input[type="checkbox"]:checked + label::before {
+    content: '\002714';
+    background-color: var(--accent-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--background-color)
+}
+
+select {
+    font-family: 'Noto Sans K', 'Noto Sans';
+    font-size: 1em;
+    font-weight: 300;
+
+    appearance: base-select;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: solid 1px var(--static-color);
+    border-radius: 0.5em;
+
+    box-shadow: 0 0 20px var(--static-color);
+
+    transition: all 0.25s;
+    &:hover {
+        background-color: var(--hover-color);
+    }
+
+    padding: 0.5em;
+}
+
+::picker(select) { border: none; appearance: base-select; }
+
+option {
+    font-family: 'Noto Sans K', 'Noto Sans';
+    font-size: .7em;
+    font-weight: 400;
+
+    display: flex;
+    justify-content: flex-start;
+
+    border: solid 1px var(--static-color);
+    background: var(--background-color);
+    padding: 0 .2em 0 .2em;
+
+    transition: all 0.25s;
+    &:hover { background-color: var(--hover-color); }
+
+    &:first-of-type { border-radius: 8px 8px 0 0; }
+    &:last-of-type { border-radius: 0 0 8px 8px; }
 }

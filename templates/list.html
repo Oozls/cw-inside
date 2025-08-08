@@ -16,7 +16,13 @@
         {% for post in posts %}
         <a href="/post/{{ post._id }}" style="text-decoration:none; color: inherit;">
             <div class="post">
-                <div class="title_cell"><p class="title_text">{{ post.title }}</p></div>
+                <div class="title_cell"><p class="title_text">
+                    {% if (post.type == "none") %}
+                    {{ post.title }}
+                    {% else %}
+                    [{{ post.type }}] {{ post.title }}
+                    {% endif %}
+                </p></div>
                 <div class="unix_time_cell"><p class="unix_time_text">{{ post.unix_time }}</p></div>
                 <div class="name_cell"><p class="name_text">{{ post.user_id }}</p></div>
                 <div class="prpt_cell">

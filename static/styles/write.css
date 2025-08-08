@@ -21,48 +21,13 @@
 #editor { margin-bottom: 1em;}
 
 #button_cell {
-    /* display: flex;
+    display: flex;
     flex-direction: row;
-    place-content: left; */
+    place-content: left;
     margin-bottom: 1em;
+    gap: 1em;
 }
 
-.checkbox_container {
-    display: flex;
-    align-items: center;
-}
+.checkbox_container { padding: 0 .5em 0 .5em; }
 
-.checkbox_container label {
-    cursor: pointer;
-    display: flex;
-}
-
-.checkbox_container input[type="checkbox"] {
-    cursor: pointer;
-    opacity: 0;
-    position: absolute;
-}
-
-.checkbox_container label::before {
-    content: '';
-    width: 1em;
-    height: 1em;
-    border-radius: 0.15em;
-    margin-top: 3px;
-    margin-right: 0.5em;
-    border: 0.05em solid var(--accent-color);
-    box-shadow: 0 5px 20px var(--static-color);
-}
-
-.checkbox_container label:hover::before, .checkbox_container input[type="checkbox"]:hover + label::before {
-    background-color: var(--secondary-color);
-}
-
-.checkbox_container input[type="checkbox"]:checked + label::before {
-    content: '\002714';
-    background-color: var(--accent-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--background-color)
-}
+#type_select { width: 10em; }

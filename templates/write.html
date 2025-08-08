@@ -21,7 +21,17 @@
         <div id="editor"></div>
         <input type="hidden" name="content" id="content"></textarea>
         <div id="button_cell">
-            <div class="checkbox_container">
+            <div class="type_cell">
+                <select name="type" id="type_select">
+                    <option value="none">말머리 선택</option>
+                    <option value="talk">잡담</option>
+                    <option value="picture">짤</option>
+                    <option value="school">학교</option>
+                    <option value="game">게임</option>
+                    <option value="politics">정치</option>
+                </select>
+            </div>
+            <div class="checkbox_container container">
                 <input type="checkbox" name="isAnonymous" id="anms_button">
                 <label for="anms_button">익명으로 게시</label>
             </div>

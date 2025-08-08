@@ -129,6 +129,7 @@ def postAction():
             "unix_time":unix_time,
             "gaechoo":0,
             "user_id":session['_id'],
+            "type":request.form['type'],
             "liked_user":[],
             "img":img_data,
             "views":1,
@@ -154,10 +155,16 @@ def post(id):
     if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
     else: post['user_id'] = f'{user['num']} {user['name']}'
 
-    # if 'img' in post.keys():
-    #     for img in post['img']:
-    #         if not os.path.exists(url_for('static', filename='upload/img/'+img)): img_load(img)
-
+    type_list = {
+            'none': 'none',
+            'talk': '잡담',
+            'picture': '짤',
+            'school': '학교',
+            'game': '게임',
+            'politics': '정치'
+    }
+    post['type'] = type_list[post['type']]
+    
     post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$inc':{'views':1}})
     post['views'] += 1
 
@@ -256,7 +263,7 @@ def listPage(page):
         return '로그인이 필요합니다.', 401
     if page <= 0:
         return '잘못된 접근입니다.', 403
-
+    
     posts = list(post_collection.find().sort("unix_time", -1))[((page-1)*10):page*10]
     for post in posts:
         post['unix_time'] = unix_to_text(post['unix_time'])
@@ -265,8 +272,15 @@ def listPage(page):
         if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
         else: post['user_id'] = f'{user['num']} {user['name']}'
 
-        if 'views' not in post.keys():
-            post_collection.update_one({'_id':ObjectId(post['_id'])}, {'$set':{'views':1}})
+        type_list = {
+            'none': 'none',
+            'talk': '잡담',
+            'picture': '짤',
+            'school': '학교',
+            'game': '게임',
+            'politics': '정치'
+        }
+        post['type'] = type_list[post['type']]
 
     return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
 
