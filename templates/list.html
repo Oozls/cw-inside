@@ -11,12 +11,12 @@
         <div class="top_left">
             <p class="container" style="padding: 0.5em;">게시물 목록 ({{ count }}개)</p>
             <select name="type" id="type_select" style="padding: .5em 1em .5em 1em;" onchange="onCategoryChange(this)">
-                <option value="none">말머리 선택</option>
-                <option value="talk">잡담</option>
-                <option value="picture">짤</option>
-                <option value="school">학교</option>
-                <option value="game">게임</option>
-                <option value="politics">정치</option>
+                <option value="none" {% if not category or category == "none" %}selected{% endif %}>말머리 선택</option>
+                <option value="talk" {% if category == "talk" %}selected{% endif %}>잡담</option>
+                <option value="picture"{% if category == "picture" %}selected{% endif %}>짤</option>
+                <option value="school"{% if category == "school" %}selected{% endif %}>학교</option>
+                <option value="game"{% if category == "game" %}selected{% endif %}>게임</option>
+                <option value="politics"{% if category == "politics" %}selected{% endif %}>정치</option>
             </select>
         </div>
         <a href="/write">

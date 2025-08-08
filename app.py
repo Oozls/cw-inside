@@ -170,7 +170,7 @@ def postAction():
             "type": request.form['type'],
             "liked_user":[],
             "img": img_data,
-            "views":1,
+            "views":0,
             "isAnonymous": isAnonymous
         })
 
@@ -306,7 +306,7 @@ def listCategoryPage(page, category):
     for post in posts:
         process_post(post, post['_id'])
 
-    return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page)
+    return render_template("list.html", posts=posts, count=len(list((post_collection.find()))), page=page, category=category)
 
 
 
