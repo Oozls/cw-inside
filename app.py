@@ -102,7 +102,8 @@ def process_post(post, id):
             'picture': '짤',
             'school': '학교',
             'game': '게임',
-            'politics': '정치'
+            'politics': '정치',
+            'announcement': '공지'
     }
     post['type'] = type_list[post['type']]
 
@@ -172,6 +173,9 @@ def write():
 def postAction():
     if not isLogin():
         flash('로그인 후 글을 작성해주세요.')
+        return redirect("/write")
+    elif request.form['type'] == 'announcement' and user_collection.find_one({"_id":ObjectId(str(session['_id'])), "isAdmin": False}):
+        flash('공지 글은 관리자만 작성 가능합니다.')
         return redirect("/write")
 
     title = request.form['title']
