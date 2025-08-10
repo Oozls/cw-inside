@@ -143,7 +143,7 @@ setup_emoticon()
 @app.route('/', methods=['GET'])
 @app.route('/index')
 def index():
-    posts = list(post_collection.find().sort('gaechoo',-1))[:5]
+    posts = list(post_collection.find().sort([('gaechoo', -1), ('unix_time', -1)]))[:5]
     for post in posts:
         process_post(post, post['_id'])
     return render_template('index.html', posts=posts)
