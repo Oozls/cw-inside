@@ -218,4 +218,37 @@
     box-shadow: 0 0 2px var(--static-color);
 }
 
-.content_cell img {max-width: 100%;}
+.content_cell img { max-width: 100%; }
+
+#comment_button_cell {
+    grid-area: 2 / 1 / 3 / 3;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#con_cell {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.25em;
+    margin: 0 0 0.25em 0;
+}
+
+#con_img_cell { 
+    padding: 0.5em;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.25em;
+    
+}
+
+.con_img {
+    width: 5em;
+    height: auto;
+    margin: 0;
+    vertical-align: middle;
+}
+
+#con_select { font-size: 0.8em; }

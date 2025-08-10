@@ -4,12 +4,12 @@
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
 }
 
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(/html/font/NotoSansKR-Thin.otf) format('opentype');}
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(/html/font/NotoSansKR-Light.otf) format('opentype');}
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(/html/font/NotoSansKR-Regular.otf) format('opentype');}
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(/html/font/NotoSansKR-Medium.otf) format('opentype');}
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(/html/font/NotoSansKR-Bold.otf) format('opentype');}
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(/html/font/NotoSansKR-Black.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
 
 :root {
     --text-color: #080806;
@@ -60,7 +60,7 @@ header .left {
 }
 
 header .left p {
-    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
+    font-family: 'MaruBuri', 'Noto Sans Kr', 'Noto Sans';
     color: var(--text-color);
     font-size: clamp(10px, 2em, 30vw);
     font-weight: 900;
@@ -75,7 +75,7 @@ main {
     margin-bottom: 3em;
 
     color: var(--text-color);
-    font-family: 'Noto Sans K', 'Noto Sans';
+    font-family: 'Noto Sans Kr', 'Noto Sans';
 }
 
 @media (max-width: 1200px) {
@@ -94,7 +94,7 @@ main {
 
     -webkit-appearance: none;
 
-    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
+    font-family: 'MaruBuri', 'Noto Sans Kr', 'Noto Sans';
     padding: 1em;
     background: transparent;
     border: solid 0px;
@@ -117,7 +117,7 @@ main {
 
 #id_container {
     text-align: end;
-    font-family: 'MaruBuri', 'Noto Sans K', 'Noto Sans';
+    font-family: 'MaruBuri', 'Noto Sans Kr', 'Noto Sans';
     font-size: 1em;
     font-weight: 600;
     background-color: transparent;
@@ -212,7 +212,7 @@ main {
 }
 
 select {
-    font-family: 'Noto Sans K', 'Noto Sans';
+    font-family: 'Noto Sans Kr', 'Noto Sans';
     font-size: 1em;
     font-weight: 300;
 
@@ -235,7 +235,7 @@ select {
 ::picker(select) { border: none; appearance: base-select; }
 
 option {
-    font-family: 'Noto Sans K', 'Noto Sans';
+    font-family: 'Noto Sans Kr', 'Noto Sans';
     font-size: .7em;
     font-weight: 400;
 

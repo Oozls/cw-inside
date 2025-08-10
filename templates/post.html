@@ -3,7 +3,10 @@
 {% block title %}{% endblock %}
 
 {% block css %}<link href="{{ url_for('static', filename='styles/post.css')}}" rel="stylesheet"/>{% endblock %}
-{% block js %}<script src="{{ url_for('static', filename='scripts/post.js')}}"></script>{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='scripts/post-gaechoo.js')}}"></script>
+<script defer src="{{ url_for('static', filename='scripts/post-con.js')}}"></script>
+{% endblock %}
 
 {% block main %}
 <div class="container">
@@ -56,10 +59,20 @@
         </div>
         {% endfor %}
     </div>
-    <form action="/write_comment/{{ post._id }}" method="post">
+    <form action="/write_comment/{{ post._id }}" method="post" id="comment_form">
         <div class="comment_write_cell">
-            <textarea name="content" id="comment_content" rows="1" placeholder="댓글 작성하기..." required></textarea>
-            <button type="submit" class="comment_button">작성</button>
+            <div id="comment_content" contentEditable="true"></div>
+            <input type="hidden" name="content" id="content_input">
+            <div id="comment_button_cell">
+                <div id="con_cell">
+                    <select name="con_select" id="con_select">
+                        <option value="none">이모티콘</option>
+                        <option value="touhou1">동방 짭창고콘 1</option>
+                    </select>
+                    <div id="con_img_cell" class="container"></div>
+                </div>
+                <button type="submit" class="comment_button">작성</button>
+            </div>
         </div>
     </form>
 </div>

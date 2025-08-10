@@ -8,7 +8,8 @@ from waitress import serve
 from datetime import datetime, timezone, timedelta
 from bs4 import BeautifulSoup
 from blake3 import blake3
-import os, time, cloudinary.uploader, cloudinary.api, cloudinary, requests, logging, sys
+from PIL import Image
+import os, time, cloudinary.uploader, cloudinary.api, cloudinary, requests, logging, sys, json
 
 load_dotenv()
 
@@ -109,6 +110,31 @@ def process_post(post, id):
     elif isBlue(user['_id']) and not post['isAnonymous']: post['manager'] = 'blue'
     else: post['manager'] = 'normal'
     return post
+
+# for file in os.listdir("static/img/emoticon/touhou1"):
+#     filename, ext = os.path.splitext(file)
+#     print(f"{filename}/{ext}")
+#     if ext == '.webp':
+#         im = Image.open(os.path.join("static/img/emoticon/touhou1", file)).convert('RGB')
+#         im.save(os.path.join("static/img/emoticon/touhou1", filename+'.png'), 'png')
+
+def setup_emoticon():
+    folder_path = "static/img/emoticon/touhou1"
+    i = 1
+    isDone = False
+    files = []
+    while(not isDone):
+        file = None
+        if os.path.exists(os.path.join(folder_path, str(i)+'.png')): file = os.path.join(folder_path, str(i)+'.png')
+        elif os.path.exists(os.path.join(folder_path, str(i)+'.gif')): file = os.path.join(folder_path, str(i)+'.gif')
+        if not file:
+            isDone = True
+        else:
+            files.append('/'+file.replace('\\','/'))
+            i += 1
+    with open("static/img/emoticon/touhou1.json", "w", encoding="utf-8") as f:
+        json.dump(files, f, ensure_ascii=False)
+setup_emoticon()
 
 
 
