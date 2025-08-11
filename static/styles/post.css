@@ -2,24 +2,26 @@
     padding: 1em;
 }
 
-.back_button {
+#button_cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    vertical-align: middle;
+    gap: 10px;
+    margin-bottom: 0.7em;
+}
+
+#button_cell button { vertical-align: middle; }
+
+#back_button {
     width: 2em;
     height: 2em;
-    margin-bottom: 1em;
-    
-    border: none;
-    border-radius: 1em;
+    border-radius: 50%;
+}
 
-    box-shadow: 0 0 5px var(--static-color);
-
-    color: white;
-    background-color: var(--secondary-color);
-
-    transition: all 0.25s;
-    &:hover {
-        color: var(--background-color);
-        background-color: var(--accent-color);
-    }
+#edit_button {
+    border-radius: 0.5em;
+    padding: 0.2em 0.5em 0.2em 0.5em;
 }
 
 .container button p {
@@ -147,10 +149,10 @@
     overflow-y: auto;
 }
 
-.comment_button {
+#comment_button {
     justify-self: end;
     grid-area: 2 / 2 / 3 / 3;
-    width: 4em;
+    min-width: 4em;
     height: 2em;
     
     border: none;
@@ -238,10 +240,11 @@
 
 #con_img_cell { 
     padding: 0.5em;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.25em;
-    
+    max-height: 40em;
+    overflow-y: auto;
 }
 
 .con_img {

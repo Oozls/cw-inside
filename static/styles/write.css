@@ -18,16 +18,18 @@
 
 .toastui-editor-contents img { max-width: 100%; }
 
-#editor { margin-bottom: 1em;}
+#editor { margin-bottom: 1em; }
 
 #button_cell {
     display: flex;
     flex-direction: row;
-    place-content: left;
     margin-bottom: 1em;
     gap: 1em;
 }
 
-.checkbox_container { padding: 0 .5em 0 .5em; }
+.checkbox_container {
+    padding: 0 .5em 0 .5em;
+    height: 2.5em;
+}
 
-#type_select { width: 10em; }
+.type_cell, .checkbox_container { min-width: 8em; }

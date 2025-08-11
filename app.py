@@ -93,8 +93,8 @@ def process_post(post, id):
     post['unix_time'] = unix_to_text(post['unix_time'])
     user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
 
-    if post['isAnonymous']: post['user_id'] = '익명의 청붕이'
-    else: post['user_id'] = f'{user['num']} {user['name']}'
+    if post['isAnonymous']: post['user_name'] = '익명의 청붕이'
+    else: post['user_name'] = f'{user['num']} {user['name']}'
 
     type_list = {
             'none': 'none',
@@ -209,6 +209,17 @@ def postAction():
 
 
 
+@app.route('/edit/<id>')
+def edit(id):
+    if isLogin(): return redirect('/login')
+    post = post_collection.find_one({"_id":ObjectId(id)})
+    if session['_id'] != post['user_id'] and not isAdmin(): return '글을 수정할 권한이 없습니다.', 401
+
+    
+
+
+
+
 @app.route('/post/<id>')
 def post(id):
     post = post_collection.find_one({"_id":ObjectId(id)})
@@ -216,7 +227,7 @@ def post(id):
         return '존재하지 않는 글입니다.', 404
 
     if not isLogin():
-        return '로그인이 필요합니다.', 401
+        return redirect('/login')
     
     process_post(post, id)
     
@@ -236,7 +247,7 @@ def post(id):
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     if not isLogin():
-        return '로그인이 필요합니다.', 401
+        return redirect('/login')
 
     image = request.files['image']
     ext = os.path.split(image.filename)[1]
@@ -264,7 +275,7 @@ def like(id):
         return "글이 존재하지 않습니다.", 404
     
     if not isLogin():
-        return '로그인이 필요합니다.', 401
+        return redirect('/login')
 
     user_id = session['_id']
     
@@ -297,7 +308,7 @@ def write_comment(id):
     if not post:
         return "글이 존재하지 않습니다.", 404
     if not isLogin():
-        return '로그인이 필요합니다.', 401
+        return redirect('/login')
     
     comment_collection.insert_one({
         'post_id': id,
@@ -314,7 +325,7 @@ def write_comment(id):
 def listPage(page):
     page = int(page)
     if not isLogin():
-        return '로그인이 필요합니다.', 401
+        return redirect('/login')
     if page <= 0:
         return '잘못된 접근입니다.', 403
     
@@ -328,7 +339,7 @@ def listPage(page):
 def listCategoryPage(page, category):
     page = int(page)
     if not isLogin():
-        return '로그인이 필요합니다.', 401
+        return redirect('/login')
     if page <= 0:
         return '잘못된 접근입니다.', 403
     
@@ -422,7 +433,7 @@ def signup_register():
 
 @app.route('/confirm')
 def confirm():
-    if not isLogin(): return '로그인이 필요합니다.', 401
+    if not isLogin(): return redirect('/login')
     elif not isAdmin(): return '관리자 권한이 필요합니다.', 401
 
     accounts = list(pending_user_collection.find())

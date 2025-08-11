@@ -10,7 +10,8 @@
 {% block js %}
 <script defer src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script defer src="https://uicdn.toast.com/editor/latest/i18n/ko-kr.js"></script>
-<script src="{{ url_for('static', filename='scripts/write.js')}}"></script>
+<script defer src="{{ url_for('static', filename='scripts/write.js')}}"></script>
+<!-- <script defer src="{{ url_for('static', filename='scripts/write-con.js')}}"></script> -->
 {% endblock %}
 
 {% block main %}
@@ -19,7 +20,7 @@
         <p class="dummy">글 작성</p>
         <input type="text" name="title" placeholder="글 제목을 입력해주세요." id="title_text" class="select_container" required>
         <div id="editor"></div>
-        <input type="hidden" name="content" id="content"></textarea>
+        <input type="hidden" name="content" id="content">
         <div id="button_cell">
             <div class="type_cell">
                 <select name="type" id="type_select">

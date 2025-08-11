@@ -32,7 +32,7 @@
                             [{{ post.type }}] {{ post.title }}
                             {% endif %}
                         </p>
-                        <p class="post_user">{{ post.user_id }}</p>
+                        <p class="post_user">{{ post.user_name }}</p>
                         {% if (post.manager == "orange") %}
                         <img src="{{ url_for('static', filename='img/orange_small.png') }}" alt="" class="manager_icon orange_icon">
                         {% elif (post.manager == "blue") %}

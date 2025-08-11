@@ -10,12 +10,15 @@
 
 {% block main %}
 <div class="container">
-    <div class="button_cell">
+    <div id="button_cell">
         <a href="/list/1" style="text-decoration:none; color: inherit;">
-            <button type="submit" class="back_button">
-                <p>&lt;</p>
-            </button>
+            <button type="submit" id="back_button" class="button">&lt;</button>
         </a>
+        {% if (session["_id"] == post.user_id) %}
+        <a href="/edit_post/{{ post._id }}" style="text-decoration: none; color: inherit;">
+            <button type="submit" id="edit_button" class="button">수정</button>
+        </a>
+        {% endif %}
     </div>
     <div class="title_cell">
         <p class="title">
@@ -26,7 +29,7 @@
             {% endif %}
         </p>
         <div class="user_cell">
-            <p class="user">{{ post.user_id }}</p>
+            <p class="user">{{ post.user_name }}</p>
             {% if (post.manager == "orange") %}
             <img src="{{ url_for('static', filename='img/orange_small.png') }}" alt="" class="manager_icon orange_icon">
             {% elif (post.manager == "blue") %}
@@ -71,7 +74,7 @@
                     </select>
                     <div id="con_img_cell" class="container"></div>
                 </div>
-                <button type="submit" class="comment_button">작성</button>
+                <button type="submit" id="comment_button">작성</button>
             </div>
         </div>
     </form>
