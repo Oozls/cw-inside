@@ -92,7 +92,6 @@ def unix_to_text(unix_time):
 def process_post(post, id):
     post['unix_time'] = unix_to_text(post['unix_time'])
     user = user_collection.find_one({'_id':ObjectId(post['user_id'])})
-
     if post['isAnonymous']: post['user_name'] = '익명의 청붕이'
     else: post['user_name'] = f'{user['num']} {user['name']}'
 
@@ -200,8 +199,9 @@ def postAction():
             "type": request.form['type'],
             "liked_user":[],
             "img": img_data,
-            "views":0,
-            "isAnonymous": isAnonymous
+            "views": 0,
+            "isAnonymous": isAnonymous,
+            "isVisibleWithoutLogin": False
         })
 
     return redirect("/list/1")
@@ -209,13 +209,11 @@ def postAction():
 
 
 
-@app.route('/edit/<id>')
+@app.route('/edit_post/<id>')
 def edit(id):
     if isLogin(): return redirect('/login')
     post = post_collection.find_one({"_id":ObjectId(id)})
     if session['_id'] != post['user_id'] and not isAdmin(): return '글을 수정할 권한이 없습니다.', 401
-
-    
 
 
 
@@ -226,7 +224,7 @@ def post(id):
     if not post:
         return '존재하지 않는 글입니다.', 404
 
-    if not isLogin():
+    if not isLogin() and not post['isVisibleWithoutLogin']:
         return redirect('/login')
     
     process_post(post, id)
